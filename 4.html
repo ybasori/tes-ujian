@@ -6,8 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+<form action="" id="form">
+    <input type="text" id="angka">
+    <button type="submit">submit</button>
+</form>
+<div id="result"></div>
 <body>
     <script>
+            function errorInput(element){
+                var div = document.createElement("div");
+                var textnode = document.createTextNode("Invalid");
+                div.classList.add("warning");
+                div.appendChild(textnode);
+                document.querySelector(element).parentElement.appendChild(div);  
+                error++;
+            }
         function count_handshake(value){
             var total=0;
             var data=[];
@@ -32,8 +45,19 @@
             }
             console.log(data);
             console.log(total);
+            document.getElementById("result").innerHTML=total;
         }
-        count_handshake(3);
+        document.querySelector('#form').addEventListener('submit', function(e) {
+                e.preventDefault();
+            var value = document.getElementById("angka").value;
+            if(value==""){
+                errorInput("#angka");
+            }
+            else{
+                count_handshake(parseInt(value));
+            }
+        });
+        
     </script>
 </body>
 </html>
