@@ -13,14 +13,14 @@
 <div id="result"></div>
 <body>
     <script>
-            function errorInput(element){
-                var div = document.createElement("div");
-                var textnode = document.createTextNode("Invalid");
-                div.classList.add("warning");
-                div.appendChild(textnode);
-                document.querySelector(element).parentElement.appendChild(div);  
-                error++;
-            }
+        function errorInput(element){
+            var div = document.createElement("div");
+            var textnode = document.createTextNode("Invalid");
+            div.classList.add("warning");
+            div.appendChild(textnode);
+            document.querySelector(element).parentElement.appendChild(div);  
+            error++;
+        }
         function count_handshake(value){
             var total=0;
             var data=[];
@@ -31,9 +31,7 @@
                 if(i!=0){
                     for(var angka=i; angka<=value;angka++){
                         if(i!=angka){
-                        // if(data[i-1].indexOf(angka)<0){
-                            data[i].push(angka)
-                        // }
+                            data[i].push(angka);
                         }
                     }   
                 }
@@ -43,8 +41,6 @@
                     total++;
                 }
             }
-            console.log(data);
-            console.log(total);
             document.getElementById("result").innerHTML=total;
         }
         document.querySelector('#form').addEventListener('submit', function(e) {
