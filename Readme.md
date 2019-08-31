@@ -1,5 +1,5 @@
 nomor 1 menggunakan html dan css
-nomor 2, 3, 5 menggunakan javascript
+nomor 2, 3, 4, 5 menggunakan javascript
 nomor 7 menggunakan php
 - pengaturan database ada di systems/Db.php
 - file sql nya ada di folder Db
