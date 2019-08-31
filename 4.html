@@ -45,6 +45,10 @@
         }
         document.querySelector('#form').addEventListener('submit', function(e) {
                 e.preventDefault();
+                var elements = document.getElementsByClassName('warning');
+                while(elements.length > 0){
+                    elements[0].parentNode.removeChild(elements[0]);
+                }
             var value = document.getElementById("angka").value;
             if(value==""){
                 errorInput("#angka");
