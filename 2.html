@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form">
+            <div>
+                    <input type="text" name="username" placeholder="Username">
+            </div>
+            <div>
+                    <input type="text" name="email" placeholder="Email">
+            </div>
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+    </form>
+    <script>
+
+        function cekUsername(element){
+            var value = document.querySelector(element).value;
+            if(value==""){
+                errorInput(element);
+            }
+            else{
+                var rex=/^[a-z]+$/g
+                // tidak terdiri dari 8 karakter
+                if(value.length!=8){
+                    errorInput(element);
+                }
+                // bukan huruf kecil
+                else if(!rex.test(value)){
+                    errorInput(element);
+                }
+                else{
+                    niceInput(element)
+                }
+            }
+            
+        }
+
+        function cekEmail(element){
+            var value = document.querySelector(element).value;
+            if(value==""){
+                errorInput(element);
+            }
+            else{
+                // hanya karakter @ dan huruf kecil
+                var rexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-z\-0-9]+\.)+[a-z]{2,}))$/;
+                if(!rexEmail.test(value)){
+                    errorInput(element);
+                }
+                else{
+                    niceInput(element)
+                }
+            }
+        }
+
+        function errorInput(element){
+            var div = document.createElement("div");
+            var textnode = document.createTextNode("Invalid");
+            div.classList.add("warning");
+            div.appendChild(textnode);
+            document.querySelector(element).parentElement.appendChild(div);  
+        }
+        function niceInput(element){
+            var div = document.createElement("div");
+            var textnode = document.createTextNode("Valid");
+            div.classList.add("warning");
+            div.appendChild(textnode);
+            document.querySelector(element).parentElement.appendChild(div); 
+        }
+
+        document.querySelector('#form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // reset validasi
+
+                var elements = document.getElementsByClassName('warning');
+                while(elements.length > 0){
+                    elements[0].parentNode.removeChild(elements[0]);
+                }
+
+            // validasi username
+            cekUsername("#form input[name='username']")
+            // validasi email
+            cekEmail("#form input[name='email']")
+        });
+    </script>
+</body>
+</html>

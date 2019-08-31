@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <form id="form">
+                <div>
+                        <input type="text" name="angka" placeholder="angka">
+                </div>
+                <div>
+                    <button type="submit">Submit</button>
+                </div>
+        </form>
+        <div id="result"></div>
+
+        <script>
+            var error =0;
+            function errorInput(element){
+                var div = document.createElement("div");
+                var textnode = document.createTextNode("Invalid");
+                div.classList.add("warning");
+                div.appendChild(textnode);
+                document.querySelector(element).parentElement.appendChild(div);  
+                error++;
+            }
+            function cekAngka(element){
+                var regexAngka = /^\d+$/g;
+                var value = document.querySelector(element).value;
+                if(value=="" || !regexAngka.test(value)){
+                    errorInput(element)
+                }
+            }
+
+            function drawLine(value){
+
+                var angka = parseInt(value);
+
+                var html = "";
+                for(var i = 0; i<value; i++){
+                    for(var j=0 ; j<i; j++){
+                        html=html+"&nbsp;";
+                    }
+                    html = html + "*<br>";
+                }
+                document.getElementById("result").innerHTML=html;
+
+            }
+            
+            document.querySelector('#form').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                error =0
+                
+                var elements = document.getElementsByClassName('warning');
+                while(elements.length > 0){
+                    elements[0].parentNode.removeChild(elements[0]);
+                }
+                document.getElementById("result").innerHTML = "";
+
+                cekAngka("#form input[name='angka']");
+
+                if(error==0){
+                    drawLine(document.querySelector("#form input[name='angka']").value)
+                }
+            });
+        </script>
+    
+</body>
+</html>
